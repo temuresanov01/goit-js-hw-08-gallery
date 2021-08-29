@@ -63,3 +63,16 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+const galleryEll = document.querySelector('.js-gallery');
+const modalEll = document.querySelector('.js-lightbox');
+const modalImageEl = document.querySelector('.lightbox__image');
+const closeBtn = document.querySelector('button[data-action="close-lightbox"]');
+const overlay = document.querySelector('.lightbox__overlay');
+let currentIndex;
+
+const galleryMarkup = createImageGallery (galleryItems);
+imagesListRef.insertAdjacentHTML('beforeend', galleryMarkup);
+
+function createImageGallery (galleryItems) {
+ 
+};
