@@ -63,16 +63,25 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-const galleryEll = document.querySelector('.js-gallery');
-const modalEll = document.querySelector('.js-lightbox');
-const modalImageEl = document.querySelector('.lightbox__image');
-const closeBtn = document.querySelector('button[data-action="close-lightbox"]');
-const overlay = document.querySelector('.lightbox__overlay');
-let currentIndex;
+// const galleryEll = document.querySelector('.js-gallery');
+// const modalEll = document.querySelector('.js-lightbox');
+// const modalImageEl = document.querySelector('.lightbox__image');
+// const closeBtn = document.querySelector('button[data-action="close-lightbox"]');
+// const overlay = document.querySelector('.lightbox__overlay');
+// let currentIndex;
 
-const galleryMarkup = createImageGallery (galleryItems);
-imagesListRef.insertAdjacentHTML('beforeend', galleryMarkup);
+// const galleryMarkup = createImageGallery (galleryItems);
+// imagesListRef.insertAdjacentHTML('beforeend', galleryMarkup);
 
-function createImageGallery (galleryItems) {
+// function createImageGallery (galleryItems) {
  
+// };
+
+const gallery = [];
+for (let galleryItem of galleryItems) {
+  gallery.push(`<li><img class ="gallery__img" src="${galleryItem.preview}" alt="${galleryItem.description}"></li>`);
 };
+document.querySelector("ul").insertAdjacentHTML("beforeEnd", [...gallery].join(""));
+    
+  
+ 
