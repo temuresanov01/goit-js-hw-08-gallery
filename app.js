@@ -63,25 +63,58 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-// const galleryEll = document.querySelector('.js-gallery');
-// const modalEll = document.querySelector('.js-lightbox');
-// const modalImageEl = document.querySelector('.lightbox__image');
-// const closeBtn = document.querySelector('button[data-action="close-lightbox"]');
-// const overlay = document.querySelector('.lightbox__overlay');
-// let currentIndex;
+// ===== ADD MARKUP =====
 
-// const galleryMarkup = createImageGallery (galleryItems);
-// imagesListRef.insertAdjacentHTML('beforeend', galleryMarkup);
+const gallery = document.querySelector('.gallery');
+const largeImage = document.querySelector('.lightbox__image');
+const modal = document.querySelector('.lightbox');
+const closeBtn = document.querySelector('[data-action="close-lightbox"]');
+const overlay = document.querySelector('.lightbox__overlay');
 
-// function createImageGallery (galleryItems) {
- 
-// };
 
-const gallery = [];
+const galleryMarkup = [];
 for (let galleryItem of galleryItems) {
-  gallery.push(`<li><img class ="gallery__img" src="${galleryItem.preview}" alt="${galleryItem.description}"></li>`);
+  galleryMarkup.push(`<li class ="gallery__item">
+   <a class="gallery__link" href="${galleryItem.original}">
+    <img
+      class="gallery__image"
+      src="${galleryItem.preview}" 
+      alt="${galleryItem.description}"
+      data-source="${galleryItem.original}"
+      />
+  </a>
+  </li>`);
 };
-document.querySelector("ul").insertAdjacentHTML("beforeEnd", [...gallery].join(""));
-    
-  
- 
+document.querySelector("ul").insertAdjacentHTML("beforeEnd", [...galleryMarkup].join(""));
+
+// ===== OPEN MODAL =====
+
+const openModal = () => {
+  modal.classList.add('is-open');
+  overlay.addEventListener('click', onOverlayClick);
+  };
+
+// ===== CLOSE MODAL =====
+
+const closeModal = () => {
+  modal.classList.remove('is-open');
+  overlay.removeEventListener('click', onOverlayClick);
+};
+
+const onGalleryClick = event => {
+  event.preventDefault();
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+
+  let imageRef = event.target;
+  let largeImageURL = imageRef.dataset.source;
+  largeImage.src = largeImageURL;
+   openModal();
+};
+
+const onOverlayClick = event =>
+  event.currentTarget === event.target ? closeModal() : '';
+
+gallery.addEventListener('click', onGalleryClick);
+closeBtn.addEventListener('click', closeModal);
