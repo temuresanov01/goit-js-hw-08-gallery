@@ -92,6 +92,7 @@ document.querySelector("ul").insertAdjacentHTML("beforeEnd", [...galleryMarkup].
 const openModal = () => {
   modal.classList.add('is-open');
   overlay.addEventListener('click', onOverlayClick);
+  window.addEventListener('keydown', onEscPress); //cLOSE MODAL USING ESC
   };
 
 // ===== CLOSE MODAL =====
@@ -99,6 +100,7 @@ const openModal = () => {
 const closeModal = () => {
   modal.classList.remove('is-open');
   overlay.removeEventListener('click', onOverlayClick);
+  window.removeEventListener('keydown', onEscPress); //cLOSE MODAL USING ESC
 };
 
 const onGalleryClick = event => {
@@ -118,3 +120,11 @@ const onOverlayClick = event =>
 
 gallery.addEventListener('click', onGalleryClick);
 closeBtn.addEventListener('click', closeModal);
+
+// ===== CLOSE MODAL USING ESC =====
+
+const onEscPress = event => {
+  if (event.code === 'Escape') {
+    closeModal();
+  }
+}
